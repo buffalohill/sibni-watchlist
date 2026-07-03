@@ -34,7 +34,20 @@ export const actions: Actions = {
 			return fail(400, { message: 'Title is required' });
 		}
 
-		await db.insert(movie).values({ title, userId: user.id });
+		const tmdbIdRaw = formData.get('tmdbId')?.toString();
+		const posterPathRaw = formData.get('posterPath')?.toString();
+		const tmdbId = tmdbIdRaw ? Number(tmdbIdRaw) : null;
+		const posterPath = posterPathRaw || null;
+
+		if (tmdbId !== null && (!Number.isInteger(tmdbId) || tmdbId <= 0)) {
+			return fail(400, { message: 'Invalid movie selection' });
+		}
+
+		await db.insert(movie).values({
+			title,
+			userId: user.id,
+			...(tmdbId !== null ? { tmdbId, posterPath } : {})
+		});
 
 		return { success: true };
 	},
@@ -51,9 +64,7 @@ export const actions: Actions = {
 			return fail(400, { message: 'Invalid movie' });
 		}
 
-		await db
-			.delete(movie)
-			.where(and(eq(movie.id, id), eq(movie.userId, user.id)));
+		await db.delete(movie).where(and(eq(movie.id, id), eq(movie.userId, user.id)));
 
 		return { success: true };
 	},

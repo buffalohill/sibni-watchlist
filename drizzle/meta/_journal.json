@@ -15,6 +15,13 @@
       "when": 1783089835862,
       "tag": "0001_add_movie_drop_task",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1783092000000,
+      "tag": "0002_add_movie_poster_fields",
+      "breakpoints": true
     }
   ]
 }

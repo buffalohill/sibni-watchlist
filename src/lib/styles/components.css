@@ -153,25 +153,42 @@
 	padding: 0;
 	display: flex;
 	flex-direction: column;
-	gap: var(--space-1);
+	gap: var(--space-5);
 }
 
 .movie-item {
 	display: flex;
 	align-items: center;
-	gap: var(--space-3);
-	padding: var(--space-2) 0;
+	gap: var(--space-4);
+	padding: 0;
 	font-size: var(--font-size-base);
 }
 
-.movie-item-icon {
+.movie-item-poster {
 	flex-shrink: 0;
+	height: 72px;
+	width: auto;
+	aspect-ratio: 2 / 3;
+	object-fit: cover;
+	border-radius: var(--radius-sm);
+	box-shadow: var(--shadow-badge);
+}
+
+.movie-item-thumb {
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 48px;
+	height: 72px;
 	color: var(--color-text-muted);
+	opacity: 0.55;
 }
 
 .movie-item-title {
 	flex: 1;
 	min-width: 0;
+	font-weight: var(--font-weight-medium);
 }
 
 .movie-item-delete {
@@ -180,4 +197,75 @@
 
 .movie-item-delete:hover {
 	color: var(--color-danger);
+}
+
+.typeahead {
+	position: relative;
+}
+
+.typeahead-results {
+	position: absolute;
+	top: calc(100% + var(--space-1));
+	left: 0;
+	right: 0;
+	z-index: 10;
+	list-style: none;
+	margin: 0;
+	padding: var(--space-1);
+	background: var(--color-surface);
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-focus);
+	max-height: 320px;
+	overflow-y: auto;
+}
+
+.typeahead-status {
+	padding: var(--space-2-5) var(--space-3);
+	font-size: var(--font-size-sm);
+	color: var(--color-text-muted);
+}
+
+.typeahead-result {
+	display: flex;
+	align-items: center;
+	gap: var(--space-3);
+	width: 100%;
+	padding: var(--space-2) var(--space-3);
+	border: none;
+	border-radius: var(--radius-sm);
+	background: transparent;
+	color: var(--color-text);
+	font-size: var(--font-size-base);
+	text-align: left;
+	cursor: pointer;
+}
+
+.typeahead-result:hover,
+.typeahead-result-active {
+	background: var(--color-hover);
+}
+
+.typeahead-result-poster {
+	flex-shrink: 0;
+	height: 40px;
+	width: auto;
+	aspect-ratio: 2 / 3;
+	object-fit: cover;
+	border-radius: var(--radius-sm);
+}
+
+.typeahead-result-icon {
+	flex-shrink: 0;
+	color: var(--color-text-muted);
+}
+
+.typeahead-result-title {
+	flex: 1;
+	min-width: 0;
+}
+
+.typeahead-result-year {
+	flex-shrink: 0;
+	font-size: var(--font-size-sm);
+	color: var(--color-text-muted);
 }
