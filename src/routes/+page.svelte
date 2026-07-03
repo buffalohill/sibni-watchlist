@@ -2,12 +2,15 @@
 	import { enhance } from '$app/forms';
 	import AppLogo from '$lib/components/AppLogo.svelte';
 	import UserMenu from '$lib/components/UserMenu.svelte';
+	import { sortMovies, type SortField, type SortOrder } from '$lib/movies';
 	import { posterUrl, formatRuntime } from '$lib/tmdb';
 	import { getUserDisplayName, getUserInitials } from '$lib/user';
 	import type { ActionData, PageData } from './$types';
 	import FilmStripIcon from 'phosphor-svelte/lib/FilmStripIcon';
 	import PlusIcon from 'phosphor-svelte/lib/PlusIcon';
 	import SignOutIcon from 'phosphor-svelte/lib/SignOutIcon';
+	import SortAscendingIcon from 'phosphor-svelte/lib/SortAscendingIcon';
+	import SortDescendingIcon from 'phosphor-svelte/lib/SortDescendingIcon';
 	import TrashIcon from 'phosphor-svelte/lib/TrashIcon';
 
 	type SearchResult = {
@@ -31,6 +34,11 @@
 	let addForm: HTMLFormElement | undefined = $state();
 	let searchAbort: AbortController | null = null;
 	let debounceTimer: ReturnType<typeof setTimeout> | undefined;
+
+	let sortBy = $state<SortField>('added');
+	let sortOrder = $state<SortOrder>('desc');
+
+	const displayedMovies = $derived(sortMovies(data.movies, sortBy, sortOrder));
 
 	const showResults = $derived(
 		isOpen && query.trim().length >= 2 && (results.length > 0 || isSearching)
@@ -264,8 +272,35 @@
 		{#if data.movies.length === 0}
 			<p class="empty">No movies yet. Add one above.</p>
 		{:else}
+			<div class="list-controls">
+				<div class="sort-controls">
+					<select id="sort-by" class="sort-select" aria-label="Sort by" bind:value={sortBy}>
+						<option value="added">Date added</option>
+						<option value="title">Title</option>
+						<option value="date">Date</option>
+						<option value="genre">Genre</option>
+						<option value="length">Length</option>
+						<option value="actor">Main actor</option>
+					</select>
+					<button
+						type="button"
+						class="btn btn-secondary btn-icon sort-order-btn"
+						aria-label={sortOrder === 'asc' ? 'Sort ascending' : 'Sort descending'}
+						onclick={() => {
+							sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+						}}
+					>
+						{#if sortOrder === 'asc'}
+							<SortAscendingIcon size={18} />
+						{:else}
+							<SortDescendingIcon size={18} />
+						{/if}
+					</button>
+				</div>
+			</div>
+
 			<ul class="movie-list">
-				{#each data.movies as movie (movie.id)}
+				{#each displayedMovies as movie (movie.id)}
 					{@const runtime = formatRuntime(movie.runtimeMinutes)}
 					{@const metaParts = [
 						movie.releaseYear?.toString(),
