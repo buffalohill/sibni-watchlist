@@ -7,6 +7,7 @@
 	import FilmStripIcon from 'phosphor-svelte/lib/FilmStripIcon';
 	import PlusIcon from 'phosphor-svelte/lib/PlusIcon';
 	import SignOutIcon from 'phosphor-svelte/lib/SignOutIcon';
+	import TrashIcon from 'phosphor-svelte/lib/TrashIcon';
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();
 
@@ -55,7 +56,17 @@
 				{#each data.movies as movie (movie.id)}
 					<li class="movie-item">
 						<FilmStripIcon class="movie-item-icon" size={18} />
-						{movie.title}
+						<span class="movie-item-title">{movie.title}</span>
+						<form method="post" action="?/deleteMovie" use:enhance>
+							<input type="hidden" name="id" value={movie.id} />
+							<button
+								type="submit"
+								class="btn btn-secondary btn-icon movie-item-delete"
+								aria-label="Delete {movie.title}"
+							>
+								<TrashIcon size={iconSize} />
+							</button>
+						</form>
 					</li>
 				{/each}
 			</ul>

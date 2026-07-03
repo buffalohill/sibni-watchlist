@@ -168,3 +168,16 @@
 	flex-shrink: 0;
 	color: var(--color-text-muted);
 }
+
+.movie-item-title {
+	flex: 1;
+	min-width: 0;
+}
+
+.movie-item-delete {
+	flex-shrink: 0;
+}
+
+.movie-item-delete:hover {
+	color: var(--color-danger);
+}
