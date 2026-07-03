@@ -1,8 +1,12 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import type { ActionData } from './$types';
+	import SignInIcon from 'phosphor-svelte/lib/SignInIcon';
+	import UserPlusIcon from 'phosphor-svelte/lib/UserPlusIcon';
 
 	let { form }: { form: ActionData } = $props();
+
+	const iconSize = 18;
 </script>
 
 <svelte:head>
@@ -32,8 +36,14 @@
 				<input name="name" class="input" autocomplete="name" />
 			</label>
 			<div class="form-actions">
-				<button type="submit" class="btn btn-primary">Login</button>
-				<button type="submit" class="btn btn-secondary" formaction="?/signUpEmail">Register</button>
+				<button type="submit" class="btn btn-primary">
+					<SignInIcon size={iconSize} />
+					Login
+				</button>
+				<button type="submit" class="btn btn-secondary" formaction="?/signUpEmail">
+					<UserPlusIcon size={iconSize} />
+					Register
+				</button>
 			</div>
 		</form>
 		{#if form?.message}

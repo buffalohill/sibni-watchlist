@@ -1,13 +1,9 @@
 .card {
-	background: var(--color-surface);
-	border: 1px solid var(--color-border);
-	border-radius: var(--radius-md);
-	box-shadow: var(--shadow-sm);
-	padding: var(--space-5);
+	padding: 0;
 }
 
 .card + .card {
-	margin-top: var(--space-4);
+	margin-top: var(--space-10);
 }
 
 .card--auth {
@@ -16,12 +12,11 @@
 }
 
 .section-title {
-	font-size: var(--font-size-xs);
+	font-size: var(--font-size-md);
 	font-weight: var(--font-weight-semibold);
-	text-transform: uppercase;
-	letter-spacing: var(--letter-spacing-wide);
-	color: var(--color-text-muted);
-	margin-bottom: var(--space-4);
+	letter-spacing: var(--letter-spacing-tight);
+	color: var(--color-text);
+	margin-bottom: var(--space-3);
 }
 
 .input {
@@ -29,18 +24,18 @@
 	min-width: 0;
 	width: 100%;
 	padding: var(--space-2-5) var(--space-3);
-	border: 1px solid var(--color-border);
+	border: none;
 	border-radius: var(--radius-sm);
-	background: var(--color-surface);
+	background: var(--color-input-bg);
 	color: var(--color-text);
 	transition:
-		border-color var(--duration-fast) var(--easing-default),
+		background-color var(--duration-fast) var(--easing-default),
 		box-shadow var(--duration-fast) var(--easing-default);
 }
 
 .input:focus {
 	outline: none;
-	border-color: var(--color-accent);
+	background: var(--color-surface);
 	box-shadow: var(--shadow-focus);
 }
 
@@ -52,16 +47,19 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
+	gap: var(--space-2);
 	padding: var(--space-2-5) var(--space-4);
-	border: 1px solid transparent;
+	border: none;
 	border-radius: var(--radius-sm);
 	font-size: var(--font-size-base);
 	font-weight: var(--font-weight-medium);
 	cursor: pointer;
 	white-space: nowrap;
-	transition:
-		background-color var(--duration-fast) var(--easing-default),
-		border-color var(--duration-fast) var(--easing-default);
+	transition: background-color var(--duration-fast) var(--easing-default);
+}
+
+.btn-icon {
+	padding: var(--space-2-5);
 }
 
 .btn-primary {
@@ -74,26 +72,54 @@
 }
 
 .btn-secondary {
-	background: var(--color-surface);
-	color: var(--color-secondary);
-	border-color: var(--color-secondary);
+	background: transparent;
+	color: var(--color-text-muted);
 }
 
 .btn-secondary:hover {
-	background: color-mix(in srgb, var(--color-secondary) 8%, var(--color-surface));
-	border-color: var(--color-secondary-hover);
-	color: var(--color-secondary-hover);
+	background: var(--color-hover);
+	color: var(--color-text);
+}
+
+.add-bar {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	gap: var(--space-2);
+	padding: var(--space-1);
+	background: var(--color-input-bg);
+	border-radius: var(--radius-md);
+	transition:
+		background-color var(--duration-fast) var(--easing-default),
+		box-shadow var(--duration-fast) var(--easing-default);
+}
+
+.add-bar:focus-within {
+	background: var(--color-surface);
+	box-shadow: var(--shadow-focus);
+}
+
+.add-bar .input {
+	flex: 1;
+	min-width: 0;
+	background: transparent;
+	padding: var(--space-2-5) var(--space-3);
+}
+
+.add-bar .input:focus {
+	background: transparent;
+	box-shadow: none;
+}
+
+.add-bar .btn {
+	flex-shrink: 0;
+	padding: var(--space-2-5);
 }
 
 .form-stack {
 	display: flex;
 	flex-direction: column;
 	gap: var(--space-4);
-}
-
-.form-row {
-	display: flex;
-	gap: var(--space-2);
 }
 
 .field {
@@ -125,19 +151,20 @@
 	list-style: none;
 	margin: 0;
 	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-1);
 }
 
 .movie-item {
-	padding: var(--space-3) 0;
-	border-bottom: 1px solid var(--color-border);
+	display: flex;
+	align-items: center;
+	gap: var(--space-3);
+	padding: var(--space-2) 0;
 	font-size: var(--font-size-base);
 }
 
-.movie-item:last-child {
-	border-bottom: none;
-	padding-bottom: 0;
-}
-
-.movie-item:first-child {
-	padding-top: 0;
+.movie-item-icon {
+	flex-shrink: 0;
+	color: var(--color-text-muted);
 }

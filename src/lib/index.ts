@@ -1,1 +1,1 @@
-export { getUserDisplayName } from './user';
+export { getUserDisplayName, getUserInitials } from './user';

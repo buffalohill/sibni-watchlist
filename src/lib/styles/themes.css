@@ -1,0 +1,50 @@
+/**
+ * Dark mode — follows system preference unless data-theme overrides.
+ */
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme='light']) {
+		--color-bg: var(--palette-stone-900);
+		--color-surface: var(--palette-stone-850);
+		--color-text: var(--palette-stone-25);
+		--color-text-muted: var(--palette-neutral-500);
+		--color-border: var(--palette-neutral-600);
+		--color-input-bg: color-mix(in srgb, var(--color-text) 6%, var(--color-bg));
+		--color-avatar-bg: color-mix(in srgb, var(--palette-forest-400) 22%, var(--color-bg));
+		--color-avatar-text: var(--palette-forest-300);
+		--color-hover: color-mix(in srgb, var(--color-text) 8%, transparent);
+		--color-accent: var(--palette-honey-400);
+		--color-accent-hover: var(--palette-honey-300);
+		--color-on-accent: var(--palette-forest-950);
+		--color-secondary: var(--palette-forest-400);
+		--color-secondary-hover: var(--palette-forest-300);
+		--color-on-secondary: var(--palette-forest-950);
+		--color-danger: var(--palette-plum-400);
+		--color-focus-ring: color-mix(in srgb, var(--palette-forest-400) 30%, transparent);
+		--shadow-menu: 0 8px 32px rgb(0 0 0 / 0.4), 0 0 0 1px var(--color-border);
+		--shadow-badge: 0 1px 3px rgb(0 0 0 / 0.25), 0 0 0 1px var(--color-border);
+		--color-scrim: rgb(0 0 0 / 0.45);
+	}
+}
+
+:root[data-theme='dark'] {
+	--color-bg: var(--palette-stone-900);
+	--color-surface: var(--palette-stone-850);
+	--color-text: var(--palette-stone-25);
+	--color-text-muted: var(--palette-neutral-500);
+	--color-border: var(--palette-neutral-600);
+	--color-input-bg: color-mix(in srgb, var(--color-text) 6%, var(--color-bg));
+	--color-avatar-bg: color-mix(in srgb, var(--palette-forest-400) 22%, var(--color-bg));
+	--color-avatar-text: var(--palette-forest-300);
+	--color-hover: color-mix(in srgb, var(--color-text) 8%, transparent);
+	--color-accent: var(--palette-honey-400);
+	--color-accent-hover: var(--palette-honey-300);
+	--color-on-accent: var(--palette-forest-950);
+	--color-secondary: var(--palette-forest-400);
+	--color-secondary-hover: var(--palette-forest-300);
+	--color-on-secondary: var(--palette-forest-950);
+	--color-danger: var(--palette-plum-400);
+	--color-focus-ring: color-mix(in srgb, var(--palette-forest-400) 30%, transparent);
+	--shadow-menu: 0 8px 32px rgb(0 0 0 / 0.4), 0 0 0 1px var(--color-border);
+	--shadow-badge: 0 1px 3px rgb(0 0 0 / 0.25), 0 0 0 1px var(--color-border);
+	--color-scrim: rgb(0 0 0 / 0.45);
+}

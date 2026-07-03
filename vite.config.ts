@@ -2,6 +2,7 @@ import { defineConfig } from 'vitest/config';
 import { playwright } from '@vitest/browser-playwright';
 import adapter from '@sveltejs/adapter-netlify';
 import { sveltekit } from '@sveltejs/kit/vite';
+import { sveltePhosphorOptimize } from 'phosphor-svelte/vite';
 
 export default defineConfig({
 	plugins: [
@@ -17,7 +18,8 @@ export default defineConfig({
 					include: [...config.include, '../drizzle.config.ts']
 				})
 			}
-		})
+		}),
+		sveltePhosphorOptimize()
 	],
 	test: {
 		expect: { requireAssertions: true },

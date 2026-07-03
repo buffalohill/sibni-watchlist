@@ -1,23 +1,38 @@
 /**
  * Primitive palette — raw color values.
  * Prefer semantic tokens from tokens.css in component styles.
+ *
+ * Forest green is the hero hue; honey gold provides warm contrast.
+ * Backgrounds use plain stone neutrals so green reads as accent, not wallpaper.
  */
 :root {
-	/* Neutrals — warm browns / parchment */
-	--palette-parchment-25: #faf7f2;
-	--palette-parchment-50: #f4efe6;
-	--palette-parchment-100: #e8e0d4;
-	--palette-taupe-400: #6b6358;
-	--palette-taupe-300: #cfc6b8;
-	--palette-forest-900: #1a2f24;
+	/* Neutrals — stone */
+	--palette-stone-25: #fafaf9;
+	--palette-stone-50: #f4f4f3;
+	--palette-stone-100: #e8e8e6;
+	--palette-stone-900: #1a1a19;
+	--palette-stone-850: #242423;
+	--palette-neutral-400: #6f6f6c;
+	--palette-neutral-500: #969693;
+	--palette-neutral-300: #d6d6d4;
+	--palette-neutral-600: #3a3a38;
 
-	/* Forest green */
-	--palette-forest-700: #2d5a40;
-	--palette-forest-800: #234a34;
+	/* Forest green — hero */
+	--palette-forest-950: #121f19;
+	--palette-forest-900: #1a2e24;
+	--palette-forest-800: #243d31;
+	--palette-forest-700: #2f5241;
+	--palette-forest-600: #3a6852;
+	--palette-forest-400: #5a9580;
+	--palette-forest-300: #72ad96;
 
-	/* 70s orange — burnt / harvest */
-	--palette-orange-500: #d4622a;
-	--palette-orange-600: #bc5520;
+	/* Honey gold — contrast accent */
+	--palette-honey-500: #b5983d;
+	--palette-honey-600: #9c8233;
+	--palette-honey-400: #c4a84a;
+	--palette-honey-300: #d4b85a;
 
-	--palette-red-600: #b54a4a;
+	/* Plum — feedback without red */
+	--palette-plum-600: #7a5568;
+	--palette-plum-400: #c088a0;
 }

@@ -1,11 +1,17 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { getUserDisplayName } from '$lib/user';
-	import type { ActionData, PageServerData } from './$types';
+	import UserMenu from '$lib/components/UserMenu.svelte';
+	import { getUserDisplayName, getUserInitials } from '$lib/user';
+	import type { ActionData, PageData } from './$types';
+	import FilmStripIcon from 'phosphor-svelte/lib/FilmStripIcon';
+	import PlusIcon from 'phosphor-svelte/lib/PlusIcon';
+	import SignOutIcon from 'phosphor-svelte/lib/SignOutIcon';
 
-	let { data, form }: { data: PageServerData; form: ActionData } = $props();
+	let { data, form }: { data: PageData; form: ActionData } = $props();
 
 	const displayName = $derived(getUserDisplayName(data.user));
+	const initials = $derived(getUserInitials(data.user));
+	const iconSize = 20;
 </script>
 
 <svelte:head>
@@ -14,20 +20,24 @@
 
 <main class="page">
 	<header class="header">
-		<div>
-			<h1>Watchlist</h1>
-			<p class="greeting">Hi, {displayName}</p>
+		<h1>Watchlist</h1>
+		<div class="header-actions">
+			<UserMenu {displayName} {initials} />
+			<form method="post" action="?/signOut" use:enhance>
+				<button type="submit" class="btn btn-secondary btn-icon" aria-label="Sign out">
+					<SignOutIcon size={iconSize} />
+				</button>
+			</form>
 		</div>
-		<form method="post" action="?/signOut" use:enhance>
-			<button type="submit" class="btn btn-secondary">Sign out</button>
-		</form>
 	</header>
 
 	<section class="card">
 		<h2 class="section-title">Add a movie</h2>
-		<form method="post" action="?/addMovie" use:enhance class="form-row">
+		<form method="post" action="?/addMovie" use:enhance class="add-bar">
 			<input name="title" placeholder="Movie title" class="input" />
-			<button type="submit" class="btn btn-primary">Add</button>
+			<button type="submit" class="btn btn-primary" aria-label="Add movie">
+				<PlusIcon size={iconSize} />
+			</button>
 		</form>
 		{#if form?.message}
 			<p class="error">{form.message}</p>
@@ -35,13 +45,15 @@
 	</section>
 
 	<section class="card">
-		<h2 class="section-title">Your movies</h2>
 		{#if data.movies.length === 0}
 			<p class="empty">No movies yet. Add one above.</p>
 		{:else}
 			<ul class="movie-list">
 				{#each data.movies as movie (movie.id)}
-					<li class="movie-item">{movie.title}</li>
+					<li class="movie-item">
+						<FilmStripIcon class="movie-item-icon" size={18} />
+						{movie.title}
+					</li>
 				{/each}
 			</ul>
 		{/if}
