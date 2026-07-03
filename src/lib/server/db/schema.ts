@@ -1,9 +1,13 @@
-import { pgTable, serial, integer, text } from 'drizzle-orm/pg-core';
+import { pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
+import { user } from './auth.schema';
 
-export const task = pgTable('task', {
+export const movie = pgTable('movie', {
 	id: serial('id').primaryKey(),
 	title: text('title').notNull(),
-	priority: integer('priority').notNull().default(1)
+	userId: text('user_id')
+		.notNull()
+		.references(() => user.id, { onDelete: 'cascade' }),
+	createdAt: timestamp('created_at').defaultNow().notNull()
 });
 
-export *  from './auth.schema';
+export * from './auth.schema';

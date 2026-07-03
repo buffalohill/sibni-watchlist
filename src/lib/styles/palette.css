@@ -1,0 +1,23 @@
+/**
+ * Primitive palette — raw color values.
+ * Prefer semantic tokens from tokens.css in component styles.
+ */
+:root {
+	/* Neutrals — warm browns / parchment */
+	--palette-parchment-25: #faf7f2;
+	--palette-parchment-50: #f4efe6;
+	--palette-parchment-100: #e8e0d4;
+	--palette-taupe-400: #6b6358;
+	--palette-taupe-300: #cfc6b8;
+	--palette-forest-900: #1a2f24;
+
+	/* Forest green */
+	--palette-forest-700: #2d5a40;
+	--palette-forest-800: #234a34;
+
+	/* 70s orange — burnt / harvest */
+	--palette-orange-500: #d4622a;
+	--palette-orange-600: #bc5520;
+
+	--palette-red-600: #b54a4a;
+}

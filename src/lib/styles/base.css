@@ -1,0 +1,30 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+	margin: 0;
+	font-family: var(--font-family-sans);
+	font-size: var(--font-size-md);
+	line-height: var(--line-height-base);
+	color: var(--color-text);
+	background: var(--color-bg);
+}
+
+h1,
+h2,
+p {
+	margin: 0;
+}
+
+button,
+input {
+	font: inherit;
+}

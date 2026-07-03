@@ -1,12 +1,11 @@
 import { fail, redirect } from '@sveltejs/kit';
-import type { Actions } from './$types';
-import type { PageServerLoad } from './$types';
+import type { Actions, PageServerLoad } from './$types';
 import { auth } from '$lib/server/auth';
 import { APIError } from 'better-auth/api';
 
 export const load: PageServerLoad = (event) => {
 	if (event.locals.user) {
-		return redirect(302, '/demo/better-auth');
+		return redirect(302, '/');
 	}
 	return {};
 };
@@ -19,11 +18,8 @@ export const actions: Actions = {
 
 		try {
 			await auth.api.signInEmail({
-				body: {
-					email,
-					password,
-					callbackURL: '/auth/verification-success'
-				}
+				body: { email, password },
+				headers: event.request.headers
 			});
 		} catch (error) {
 			if (error instanceof APIError) {
@@ -32,22 +28,22 @@ export const actions: Actions = {
 			return fail(500, { message: 'Unexpected error' });
 		}
 
-		return redirect(302, '/demo/better-auth');
+		return redirect(302, '/');
 	},
 	signUpEmail: async (event) => {
 		const formData = await event.request.formData();
 		const email = formData.get('email')?.toString() ?? '';
 		const password = formData.get('password')?.toString() ?? '';
-		const name = formData.get('name')?.toString() ?? '';
+		const name = formData.get('name')?.toString().trim() ?? '';
+
+		if (!name) {
+			return fail(400, { message: 'Name is required for registration' });
+		}
 
 		try {
 			await auth.api.signUpEmail({
-				body: {
-					email,
-					password,
-					name,
-					callbackURL: '/auth/verification-success'
-				}
+				body: { email, password, name },
+				headers: event.request.headers
 			});
 		} catch (error) {
 			if (error instanceof APIError) {
@@ -56,6 +52,6 @@ export const actions: Actions = {
 			return fail(500, { message: 'Unexpected error' });
 		}
 
-		return redirect(302, '/demo/better-auth');
-	},
+		return redirect(302, '/');
+	}
 };
