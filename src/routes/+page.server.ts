@@ -4,6 +4,7 @@ import type { Actions, PageServerLoad } from './$types';
 import { auth } from '$lib/server/auth';
 import { db } from '$lib/server/db';
 import { movie } from '$lib/server/db/schema';
+import { fetchMovieDetails } from '$lib/server/tmdb';
 
 export const load: PageServerLoad = async (event) => {
 	const user = event.locals.user;
@@ -43,11 +44,18 @@ export const actions: Actions = {
 			return fail(400, { message: 'Invalid movie selection' });
 		}
 
-		await db.insert(movie).values({
-			title,
-			userId: user.id,
-			...(tmdbId !== null ? { tmdbId, posterPath } : {})
-		});
+		if (tmdbId !== null) {
+			const details = await fetchMovieDetails(tmdbId);
+			await db.insert(movie).values({
+				title,
+				userId: user.id,
+				tmdbId,
+				posterPath,
+				...(details ?? {})
+			});
+		} else {
+			await db.insert(movie).values({ title, userId: user.id });
+		}
 
 		return { success: true };
 	},

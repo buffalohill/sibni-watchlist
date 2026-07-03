@@ -2,7 +2,7 @@
 	import { enhance } from '$app/forms';
 	import AppLogo from '$lib/components/AppLogo.svelte';
 	import UserMenu from '$lib/components/UserMenu.svelte';
-	import { posterUrl } from '$lib/tmdb';
+	import { posterUrl, formatRuntime } from '$lib/tmdb';
 	import { getUserDisplayName, getUserInitials } from '$lib/user';
 	import type { ActionData, PageData } from './$types';
 	import FilmStripIcon from 'phosphor-svelte/lib/FilmStripIcon';
@@ -266,6 +266,12 @@
 		{:else}
 			<ul class="movie-list">
 				{#each data.movies as movie (movie.id)}
+					{@const runtime = formatRuntime(movie.runtimeMinutes)}
+					{@const metaParts = [
+						movie.releaseYear?.toString(),
+						movie.genres?.join(' · '),
+						runtime
+					].filter(Boolean)}
 					<li class="movie-item">
 						{#if movie.posterPath}
 							<img
@@ -279,7 +285,24 @@
 								<FilmStripIcon size={22} />
 							</span>
 						{/if}
-						<span class="movie-item-title">{movie.title}</span>
+						<div class="movie-item-content">
+							<h3 class="movie-item-title">{movie.title}</h3>
+							{#if metaParts.length > 0}
+								<p class="movie-item-meta">{metaParts.join(' · ')}</p>
+							{/if}
+							{#if movie.directors?.length}
+								<p class="movie-item-detail">
+									<span class="movie-item-detail-label">Director:</span>
+									{movie.directors.join(', ')}
+								</p>
+							{/if}
+							{#if movie.actors?.length}
+								<p class="movie-item-detail">
+									<span class="movie-item-detail-label">Starring:</span>
+									{movie.actors.join(', ')}
+								</p>
+							{/if}
+						</div>
 						<form method="post" action="?/deleteMovie" use:enhance>
 							<input type="hidden" name="id" value={movie.id} />
 							<button
