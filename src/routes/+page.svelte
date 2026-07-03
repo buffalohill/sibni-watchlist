@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import AppLogo from '$lib/components/AppLogo.svelte';
 	import UserMenu from '$lib/components/UserMenu.svelte';
 	import { getUserDisplayName, getUserInitials } from '$lib/user';
 	import type { ActionData, PageData } from './$types';
@@ -20,7 +21,9 @@
 
 <main class="page">
 	<header class="header">
-		<h1>Watchlist</h1>
+		<h1 class="header-title">
+			<AppLogo />
+		</h1>
 		<div class="header-actions">
 			<UserMenu {displayName} {initials} />
 			<form method="post" action="?/signOut" use:enhance>

@@ -27,11 +27,36 @@
 	overflow: visible;
 }
 
-.header h1 {
+.header-title {
+	min-width: 0;
+}
+
+.app-logo {
+	display: inline-flex;
+	text-decoration: none;
+	color: var(--color-text);
+}
+
+.app-logo-lockup {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.32em;
 	font-size: var(--font-size-xl);
 	font-weight: var(--font-weight-semibold);
 	letter-spacing: var(--letter-spacing-tight);
-	min-width: 0;
+	line-height: 1;
+}
+
+.app-logo--lg .app-logo-lockup {
+	font-size: 1.625rem;
+}
+
+.app-logo-icon {
+	flex-shrink: 0;
+}
+
+.app-logo-wordmark {
+	white-space: nowrap;
 }
 
 .header-actions {
@@ -134,11 +159,19 @@
 	max-width: 10rem;
 }
 
+.auth-brand {
+	display: flex;
+	justify-content: center;
+	margin-bottom: var(--space-6);
+}
+
 .auth-title {
 	font-size: var(--font-size-lg);
 	font-weight: var(--font-weight-semibold);
 	letter-spacing: var(--letter-spacing-tight);
 	margin-bottom: var(--space-5);
+	text-align: center;
+	color: var(--color-text-muted);
 }
 
 .menu {

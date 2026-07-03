@@ -11,6 +11,8 @@
 		--color-input-bg: color-mix(in srgb, var(--color-text) 6%, var(--color-bg));
 		--color-avatar-bg: color-mix(in srgb, var(--palette-forest-400) 22%, var(--color-bg));
 		--color-avatar-text: var(--palette-forest-300);
+		--color-logo-mark-bg: color-mix(in srgb, var(--palette-forest-400) 18%, var(--color-bg));
+		--color-logo-mark-icon: var(--palette-forest-300);
 		--color-hover: color-mix(in srgb, var(--color-text) 8%, transparent);
 		--color-accent: var(--palette-honey-400);
 		--color-accent-hover: var(--palette-honey-300);
@@ -35,6 +37,8 @@
 	--color-input-bg: color-mix(in srgb, var(--color-text) 6%, var(--color-bg));
 	--color-avatar-bg: color-mix(in srgb, var(--palette-forest-400) 22%, var(--color-bg));
 	--color-avatar-text: var(--palette-forest-300);
+	--color-logo-mark-bg: color-mix(in srgb, var(--palette-forest-400) 18%, var(--color-bg));
+	--color-logo-mark-icon: var(--palette-forest-300);
 	--color-hover: color-mix(in srgb, var(--color-text) 8%, transparent);
 	--color-accent: var(--palette-honey-400);
 	--color-accent-hover: var(--palette-honey-300);

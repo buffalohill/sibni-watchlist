@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import AppLogo from '$lib/components/AppLogo.svelte';
 	import type { ActionData } from './$types';
 	import SignInIcon from 'phosphor-svelte/lib/SignInIcon';
 	import UserPlusIcon from 'phosphor-svelte/lib/UserPlusIcon';
@@ -15,6 +16,9 @@
 
 <main class="page page--centered">
 	<div class="card card--auth">
+		<div class="auth-brand">
+			<AppLogo size="lg" href={null} />
+		</div>
 		<h1 class="auth-title">Login</h1>
 		<form method="post" action="?/signInEmail" use:enhance class="form-stack">
 			<label class="field">
