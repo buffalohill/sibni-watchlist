@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import AppLogo from '$lib/components/AppLogo.svelte';
+	import RecommendationModal from '$lib/components/RecommendationModal.svelte';
 	import UserMenu from '$lib/components/UserMenu.svelte';
+	import { pickRandomMovie, type RecommendationMovie } from '$lib/recommendation';
 	import { sortMovies, type SortField, type SortOrder } from '$lib/movies';
 	import { posterUrl, formatRuntime } from '$lib/tmdb';
 	import { getUserDisplayName, getUserInitials } from '$lib/user';
@@ -11,6 +13,7 @@
 	import SignOutIcon from 'phosphor-svelte/lib/SignOutIcon';
 	import SortAscendingIcon from 'phosphor-svelte/lib/SortAscendingIcon';
 	import SortDescendingIcon from 'phosphor-svelte/lib/SortDescendingIcon';
+	import SparkleIcon from 'phosphor-svelte/lib/SparkleIcon';
 	import TrashIcon from 'phosphor-svelte/lib/TrashIcon';
 
 	type SearchResult = {
@@ -37,6 +40,8 @@
 
 	let sortBy = $state<SortField>('added');
 	let sortOrder = $state<SortOrder>('desc');
+	let recommendedMovie = $state<RecommendationMovie | null>(null);
+	let recommendationPick = $state(0);
 
 	const displayedMovies = $derived(sortMovies(data.movies, sortBy, sortOrder));
 
@@ -158,6 +163,15 @@
 		const related = event.relatedTarget as Node | null;
 		if (related && (event.currentTarget as HTMLElement).parentElement?.contains(related)) return;
 		isOpen = false;
+	}
+
+	function pickForMe() {
+		recommendationPick += 1;
+		recommendedMovie = pickRandomMovie(data.movies);
+	}
+
+	function closeRecommendation() {
+		recommendedMovie = null;
 	}
 </script>
 
@@ -297,6 +311,10 @@
 						{/if}
 					</button>
 				</div>
+				<button type="button" class="btn btn-secondary" onclick={pickForMe}>
+					<SparkleIcon size={18} />
+					Pick for me
+				</button>
 			</div>
 
 			<ul class="movie-list">
@@ -354,3 +372,11 @@
 		{/if}
 	</section>
 </main>
+
+{#if recommendedMovie}
+	<RecommendationModal
+		movie={recommendedMovie}
+		variationKey={recommendationPick}
+		onclose={closeRecommendation}
+	/>
+{/if}

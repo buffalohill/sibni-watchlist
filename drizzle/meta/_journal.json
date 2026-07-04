@@ -29,6 +29,13 @@
       "when": 1783094000000,
       "tag": "0003_add_movie_metadata",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1783096000000,
+      "tag": "0004_add_movie_overview_tagline",
+      "breakpoints": true
     }
   ]
 }

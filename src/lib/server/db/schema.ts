@@ -11,6 +11,8 @@ export const movie = pgTable('movie', {
 	directors: text('directors').array(),
 	actors: text('actors').array(),
 	genres: text('genres').array(),
+	overview: text('overview'),
+	tagline: text('tagline'),
 	userId: text('user_id')
 		.notNull()
 		.references(() => user.id, { onDelete: 'cascade' }),

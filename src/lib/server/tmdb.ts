@@ -13,6 +13,8 @@ export type TmdbMovieDetails = {
 	genres: string[] | null;
 	directors: string[] | null;
 	actors: string[] | null;
+	overview: string | null;
+	tagline: string | null;
 };
 
 type TmdbSearchResponse = {
@@ -27,12 +29,19 @@ type TmdbSearchResponse = {
 type TmdbMovieDetailsResponse = {
 	release_date?: string;
 	runtime?: number | null;
+	overview?: string;
+	tagline?: string;
 	genres?: Array<{ name: string }>;
 	credits?: {
 		cast?: Array<{ name: string; order: number }>;
 		crew?: Array<{ name: string; job: string }>;
 	};
 };
+
+function normalizeText(value: string | undefined): string | null {
+	const trimmed = value?.trim();
+	return trimmed ? trimmed : null;
+}
 
 const CAST_LIMIT = 4;
 
@@ -119,7 +128,9 @@ export async function fetchMovieDetails(tmdbId: number): Promise<TmdbMovieDetail
 				typeof data.runtime === 'number' && data.runtime > 0 ? data.runtime : null,
 			genres: genres && genres.length > 0 ? genres : null,
 			directors: directors && directors.length > 0 ? directors : null,
-			actors: actors && actors.length > 0 ? actors : null
+			actors: actors && actors.length > 0 ? actors : null,
+			overview: normalizeText(data.overview),
+			tagline: normalizeText(data.tagline)
 		};
 	} catch (error) {
 		console.error('TMDB details error:', error);
